@@ -1,0 +1,79 @@
+app:
+  name: wallet-se
+  port: 3003
+  timezone: ${APP_TIMEZONE}
+  debug: ${APP_DEBUG}
+  env: ${APP_ENV} # dev | stg | prod
+  read_timeout: "10"
+  write_timeout: "15"
+  key: "${APP_KEY}"
+  jwt_key: "${APP_JWT_KEY}"
+  default_lang: "${APP_DEFAULT_LANG}"
+
+logger:
+  name: "skill-task" # service name
+  level: "info" # trace | debug | info | warn | error | fatal | panic
+
+apm:
+  address: "${APM_ADDRESS}"
+  enable: ${APM_ENABLE}
+  name: ${APM_NAME}
+
+redis:
+  host: 127.0.0.1:6379
+  db: 2 # 0
+  password:
+  read_timeout: 2 # 1  second
+  write_timeout: 2 # 1  second
+  pool_size: 30 # 100
+  pool_timeout_second: 10 # 100
+  min_idle_conn: 5 # 10
+  idle_timeout_second: 5 # 240
+  route_by_latency: true # true
+  idle_frequency_check: 1 # 1
+  read_only: false
+  route_randomly: false
+  max_redirect: 3 # this config if cluster mode
+  cluster_mode: false
+  tls_enable: false
+  insecure_skip_verify: false # if tls_enable == true, this config use for tls insecure_skip_verify true or false
+
+# postgres
+db_write:
+  driver: postgres
+  host: 127.0.0.1
+  port: 5432
+  name: wallet-se # database name
+  user: postgres # database user
+  pass: postgres  # database password
+  max_open: 50
+  max_idle: 25
+  timeout_second: 10
+  life_time_ms: 300000
+  charset: utf8
+  timezone: Asia/Jakarta
+
+# postgres
+db_read:
+  driver: postgres
+  host: 127.0.0.1
+  port: 5432
+  name: wallet-se # database name
+  user: postgres # database user
+  pass: postgres # database password
+  max_open: 50
+  max_idle: 25
+  timeout_second: 10
+  life_time_ms: 300000
+  charset: utf8
+  timezone: Asia/Jakarta
+
+pubsub:
+  account_path: "${PUBSUB_ACCOUNTPATH}"
+  project_id: "${PUBSUB_PROJECTID}"
+  topic: "${PUBSUB_TOPIC}"
+
+gcs:
+  account_path: "${GCS_ACCOUNTPATH}"
+  bucket: "${GCS_BUCKET}"
+  prefix: "${GCS_PREFIX}"
